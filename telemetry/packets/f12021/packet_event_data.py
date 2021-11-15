@@ -1,7 +1,7 @@
 import ctypes
 
-from f1_2021.packets.utils import Packet, PacketMixin
-from f1_2021.packets.packet_header import PacketHeader
+from .utils import Packet, PacketMixin
+from .packet_header import PacketHeader
 
 
 class FastestLap(Packet):

@@ -1,6 +1,7 @@
 import time
 import json
 import socket
+import random
 
 
 def main():
@@ -11,8 +12,6 @@ def main():
     _socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
     _socket.bind((localIP, localPort))
     print("UDP server up and listening")
-
-    import random
 
     with open(f'../data/sample_10hz.{random.randint(1, 1000)}.bin', 'wb+') as handler:
         while True:

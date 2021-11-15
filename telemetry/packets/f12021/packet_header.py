@@ -1,6 +1,6 @@
 import ctypes
 
-from f1_2021.packets.utils import Packet
+from .utils import Packet
 
 
 class PacketHeader(Packet):
