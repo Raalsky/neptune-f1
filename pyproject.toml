@@ -1,1 +1,13 @@
-# Initial empty pyproject.toml
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.black]
+language-version = "python3"
+target-version = [ "py310" ]
+line-length = 120
+include = '\.pyi?$'
+
+[flake8]
+max-line-length = 121
+additional-dependencies = [ "pep8-naming", "flake8-black", "flake8-import-order", "flake8-annotations" ]
