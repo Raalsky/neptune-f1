@@ -1,4 +1,3 @@
-from typing import List
 from dataclasses import dataclass
 
 
@@ -73,4 +72,4 @@ class CarSetupData:
 
 @dataclass
 class CarSetup:
-    car_setups = List[CarSetupData]
+    car_setups = list[CarSetupData]

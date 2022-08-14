@@ -1,4 +1,3 @@
-from typing import List
 from dataclasses import dataclass
 
 
@@ -63,22 +62,22 @@ class CarMotion:
 class CarsMotion:
     # Data for all cars on track
     # Extra player car ONLY data
-    cars_motion: List[CarMotion]
+    cars_motion: list[CarMotion]
 
     # Note: All wheel arrays have the following order:
-    suspension_position: List[float]
+    suspension_position: list[float]
 
     # RL, RR, FL, FR
-    suspension_velocity: List[float]
+    suspension_velocity: list[float]
 
     # RL, RR, FL, FR
-    suspension_acceleration: List[float]
+    suspension_acceleration: list[float]
 
     # Speed of each wheel
-    wheel_speed: List[float]
+    wheel_speed: list[float]
 
     # Slip ratio for each wheel
-    wheel_slip: List[float]
+    wheel_slip: list[float]
 
     # Velocity in local space
     local_velocity_x: float

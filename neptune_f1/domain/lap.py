@@ -1,4 +1,3 @@
-from typing import List
 from dataclasses import dataclass
 
 
@@ -84,4 +83,4 @@ class Lap:
 
 @dataclass
 class Laps:
-    laps: List[Lap]
+    laps: list[Lap]

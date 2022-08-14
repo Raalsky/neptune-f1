@@ -1,7 +1,7 @@
-import time
 import json
-import socket
 import random
+import socket
+import time
 
 
 def main():
@@ -13,7 +13,7 @@ def main():
     _socket.bind((localIP, localPort))
     print("UDP server up and listening")
 
-    with open(f'../data/sample_10hz.{random.randint(1, 1000)}.bin', 'wb+') as handler:
+    with open(f"../data/sample_10hz.{random.randint(1, 1000)}.bin", "wb+") as handler:
         while True:
             try:
                 message, address = _socket.recvfrom(bufferSize)
@@ -21,14 +21,12 @@ def main():
                 handler.write(message)
 
                 # ACK
-                _socket.sendto(json.dumps({
-                    'type': 'connect',
-                    'time': time.time(),
-                    'connection': True
-                }).encode(), address)
+                _socket.sendto(
+                    json.dumps({"type": "connect", "time": time.time(), "connection": True}).encode(), address
+                )
             except KeyboardInterrupt:
                 break
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

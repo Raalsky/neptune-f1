@@ -1,17 +1,16 @@
-from typing import List
 from dataclasses import dataclass
 
 
 @dataclass
 class CarDamageData:
     # Tyre wear (percentage)
-    tyres_wear: List[float]
-    
+    tyres_wear: list[float]
+
     # Tyre damage (percentage)
-    tyres_damage: List[int]
+    tyres_damage: list[int]
 
     # Brakes damage (percentage)
-    brakes_damage: List[int]
+    brakes_damage: list[int]
 
     # Front left wing damage (percentage)
     front_left_wing_damage: int
@@ -24,7 +23,7 @@ class CarDamageData:
 
     # Floor damage (percentage)
     floor_damage: int
-    
+
     # Diffuser damage (percentage)
     diffuser_damage: int
 
@@ -61,4 +60,4 @@ class CarDamageData:
 
 @dataclass
 class CarDamage:
-    car_damages: List[CarDamageData]
+    car_damages: list[CarDamageData]

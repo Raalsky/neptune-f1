@@ -1,4 +1,3 @@
-from typing import List
 from dataclasses import dataclass
 
 
@@ -26,4 +25,4 @@ class Info:
 
 @dataclass
 class LobbyInfo:
-    lobby_players: List[Info]
+    lobby_players: list[Info]

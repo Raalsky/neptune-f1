@@ -1,4 +1,3 @@
-from typing import List
 from dataclasses import dataclass
 
 
@@ -40,12 +39,12 @@ class FinalClassificationData:
     num_tyre_stints: int
 
     # Actual tyres used by this driver
-    tyre_stints_actual: List[int]
+    tyre_stints_actual: list[int]
 
     # Visual tyres used by this driver
-    tyre_stints_visual: List[int]
+    tyre_stints_visual: list[int]
 
 
 @dataclass
 class FinalClassification:
-    classification: List[FinalClassificationData]
+    classification: list[FinalClassificationData]

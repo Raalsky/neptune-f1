@@ -1,4 +1,3 @@
-from typing import List
 from dataclasses import dataclass
 
 
@@ -35,24 +34,24 @@ class CarTelemetry:
     rev_lights_bit_value: int
 
     # Brakes temperature (celsius)
-    brakes_temperature: List[int]
+    brakes_temperature: list[int]
 
     # Tyres surface temperature (celsius)
-    tyres_surface_temperature: List[int]
+    tyres_surface_temperature: list[int]
 
     # Tyres inner temperature (celsius)
-    tyres_inner_temperature: List[int]
+    tyres_inner_temperature: list[int]
 
     # Engine temperature (celsius)
     engine_temperature: int
 
     # Tyres pressure (PSI)
-    tyres_pressure: List[float]
+    tyres_pressure: list[float]
 
     # Driving surface, see appendices
-    surface_type: List[int]
+    surface_type: list[int]
 
 
 @dataclass
 class CarsTelemetry:
-    cars_telemetry: List[CarTelemetry]
+    cars_telemetry: list[CarTelemetry]
