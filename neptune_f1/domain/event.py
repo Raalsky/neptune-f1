@@ -1,4 +1,3 @@
-from typing import List
 from dataclasses import dataclass
 
 
@@ -99,4 +98,4 @@ class Flashback:
 class ButtonPressed:
     # List which buttons are being pressed
     # currently - see appendices
-    button_status: List[int]
+    button_status: list[int]
