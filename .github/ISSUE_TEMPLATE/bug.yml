@@ -43,14 +43,6 @@ body:
     validations:
       required: true
   - type: textarea
-    id: description
-    attributes:
-      label: Issue description
-      description: Describe what You were trying to get done
-      placeholder: I'm trying to import some working function from `neptune_f1` library.
-    validations:
-      required: true
-  - type: textarea
     id: reproduction_code
     attributes:
       label: Code
@@ -77,8 +69,8 @@ body:
   - type: textarea
     id: expected-behavior
     attributes:
-      label: Description
-      description: Expected behavior
+      label: Expected behavior
+      description: Describe the expected behavior of Your code
       placeholder: Should import working function
     validations:
       required: true
