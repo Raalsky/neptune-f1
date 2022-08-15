@@ -43,7 +43,7 @@ body:
     validations:
       required: true
   - type: textarea
-    id: description
+    id: issue_description
     attributes:
       label: Issue description
       description: Describe what You were trying to get done
