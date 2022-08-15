@@ -9,18 +9,18 @@ body:
     attributes:
       value: |
         We appreciate it if you would like to fill up this form :blush:
-#  - type: dropdown
-#    id: python_version
-#    attributes:
-#      label: Python Version
-#      description: Your Python version
-#      options:
-#        - "3.6"
-#        - "3.7"
-#        - "3.8"
-#        - "3.9"
-#        - "3.10"
-#        - "Other"
+  - type: dropdown
+    id: python_version
+    attributes:
+      label: Python Version
+      description: Your Python version
+      options:
+        - "3.6"
+        - "3.7"
+        - "3.8"
+        - "3.9"
+        - "3.10"
+        - "Other"
 #    validations:
 #      required: true
 #  - type: input
