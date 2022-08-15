@@ -1,0 +1,84 @@
+name: Bug report
+title: "*bug*: <Title>"
+description: Create a report to help us improve
+labels: [ "bug", "needs triage" ]
+assignees: [ "Raalsky" ]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We appreciate it if you would like to fill up this form :blush:
+  - type: dropdown
+    id: python_version
+    attributes:
+      label: Python Version
+      description: Your Python version
+      options:
+        - "3.6"
+        - "3.7"
+        - "3.8"
+        - "3.9"
+        - "3.10"
+        - "Other"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating System
+      description: Your operating system
+      placeholder: "MacOs 12.4"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction-code
+    attributes:
+      label: Dependencies
+      description: Your dependencies - output of `pip list` or `conda list`
+      placeholder: |
+        Package         Version
+        --------------- ---------
+        neptune-f1      0.1.0
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue description
+      description: Describe what You were trying to get done
+      placeholder: I'm trying to import some working function from `neptune_f1` library.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction-code
+    attributes:
+      label: Code
+      description: Paste a code that will reproduce what You're trying to do
+      placeholder: |
+        ```python
+        >>> from neptune_f1 import something_working
+        ```
+      render: Python
+    validations:
+      required: false
+  - type: textarea
+    id: traceback
+    attributes:
+      label: Traceback
+      description: Content of an error traceback
+      placeholder: |
+        ```python
+        ImportError: cannot import name 'something_working' from 'neptune_f1'
+        ```
+      render: Python
+    validations:
+      required: false
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Description
+      description: Expected behavior
+      placeholder: Should import working function
+    validations:
+      required: true
