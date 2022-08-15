@@ -37,9 +37,11 @@ body:
       label: Dependencies
       description: Your dependencies - output of `pip list` or `conda list`
       placeholder: |
+        ```
         Package         Version
         --------------- ---------
         neptune-f1      0.1.0
+        ```
     validations:
       required: true
   - type: textarea
