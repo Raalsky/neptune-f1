@@ -32,7 +32,7 @@ body:
     validations:
       required: true
   - type: textarea
-    id: reproduction_code
+    id: dependencies
     attributes:
       label: Dependencies
       description: Your dependencies - output of `pip list` or `conda list`
@@ -43,7 +43,7 @@ body:
     validations:
       required: true
   - type: textarea
-    id: issue_description
+    id: description
     attributes:
       label: Issue description
       description: Describe what You were trying to get done
@@ -62,23 +62,23 @@ body:
       render: Python
     validations:
       required: false
-#  - type: textarea
-#    id: traceback
-#    attributes:
-#      label: Traceback
-#      description: Content of an error traceback
-#      placeholder: |
-#        ```python
-#        ImportError: cannot import name 'something_working' from 'neptune_f1'
-#        ```
-#      render: Python
-#    validations:
-#      required: false
-#  - type: textarea
-#    id: expected-behavior
-#    attributes:
-#      label: Description
-#      description: Expected behavior
-#      placeholder: Should import working function
-#    validations:
-#      required: true
+  - type: textarea
+    id: traceback
+    attributes:
+      label: Traceback
+      description: Content of an error traceback
+      placeholder: |
+        ```python
+        ImportError: cannot import name 'something_working' from 'neptune_f1'
+        ```
+      render: Python
+    validations:
+      required: false
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Description
+      description: Expected behavior
+      placeholder: Should import working function
+    validations:
+      required: true
