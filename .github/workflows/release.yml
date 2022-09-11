@@ -6,6 +6,7 @@ on:
 
 jobs:
   pypi:
+    name: Publish the package
     runs-on: ubuntu-latest
     steps:
       - name: Wait for other checks to succeed
