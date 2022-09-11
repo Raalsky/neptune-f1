@@ -1,6 +1,5 @@
 import ctypes
 import json
-import typing
 
 
 def to_json(*args, **kwargs):
@@ -94,7 +93,7 @@ class Packet(ctypes.LittleEndianStructure, PacketMixin):
     _format_ = 2021
 
     @classmethod
-    def get_identifier(cls) -> typing.Union[None, int]:
+    def get_identifier(cls) -> None | int:
         return cls._id_
 
     @classmethod

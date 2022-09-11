@@ -25,7 +25,7 @@ class PacketFactory:
         }
 
     @classmethod
-    def from_handler(cls, handler) -> typing.Union[None, Packet]:
+    def from_handler(cls, handler) -> None | Packet:
         if raw_header_data := handler.read(PacketFactory.header_size()):
             packet_header_data = bytearray(raw_header_data)
             header = PacketHeader.unpack(packet_header_data)

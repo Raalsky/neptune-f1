@@ -95,7 +95,7 @@ class SessionData:
     num_marshal_zones: int
 
     # List of marshal zones – max 21
-    marshal_zones: List[MarshalZone]
+    marshal_zones: list[MarshalZone]
 
     # 0 = no safety car, 1 = full
     # 2 = virtual, 3 = formation lap
@@ -108,7 +108,7 @@ class SessionData:
     num_weather_forecast_samples: int
 
     # Array of weather forecast samples
-    weather_forecast_samples: List[WeatherForecastSample]
+    weather_forecast_samples: list[WeatherForecastSample]
 
     # 0 = Perfect, 1 = Approximate
     forecast_accuracy: bool

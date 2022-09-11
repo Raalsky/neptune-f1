@@ -18,4 +18,5 @@ setup(
     description="EA F1 2021 telemetry integration with Neptune.ai",
     install_requires=base_requirements,
     extras_require={"dev": develop_requirements},
+    package_dir={"": "src"},
 )

@@ -7,7 +7,7 @@ from telemetry.packets.factory import PacketFactory
 
 class Parser:
     @classmethod
-    def from_file(cls, filepath: typing.Union[pathlib.Path, str]) -> typing.Generator[None, Packet, None]:
+    def from_file(cls, filepath: pathlib.Path | str) -> typing.Generator[None, Packet, None]:
         with open(filepath, "rb") as handler:
             while packet := PacketFactory.from_handler(handler):
                 yield packet

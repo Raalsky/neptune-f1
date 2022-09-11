@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from neptune_f1.packets.f12021 import LapHistoryData, TyreStintHistoryData
+
 
 @dataclass
 class LapHistory:
@@ -56,7 +58,7 @@ class SessionHistory:
     best_sector3_lap_num: int
 
     # 100 laps of data max
-    lap_history_data: List[LapHistoryData]
+    lap_history_data: list[LapHistoryData]
 
     # Tyre stints history array
-    tyre_stints_history_data: List[TyreStintHistoryData]
+    tyre_stints_history_data: list[TyreStintHistoryData]
