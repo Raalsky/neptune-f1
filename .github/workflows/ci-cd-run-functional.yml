@@ -1,4 +1,4 @@
-name: unit-integration
+name: functional-tests
 
 on:
   pull_request:
@@ -26,5 +26,5 @@ jobs:
       - name: Install package
         run: poetry install --with dev
 
-      - name: Run tests
-        run: poetry run pytest
+      - name: Run functional tests
+        run: poetry run behave
