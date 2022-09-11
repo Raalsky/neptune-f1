@@ -27,4 +27,4 @@ jobs:
         run: poetry install --with dev
 
       - name: Run tests
-        run: poetry run python -m pytest -n auto -p no:sugar -q tests/
+        run: poetry run pytest
