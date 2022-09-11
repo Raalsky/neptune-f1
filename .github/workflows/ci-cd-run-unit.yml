@@ -30,7 +30,7 @@ jobs:
         run: poetry run coverage run --source='src/' -m pytest tests/unit
 
       - name: Prepare coverage report
-        run: poetry run coverage report -m
+        run: poetry run coverage xml
 
       - name: Upload coverage report do Codecov
         uses: codecov/codecov-action@v3
