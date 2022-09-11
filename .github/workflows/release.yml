@@ -20,6 +20,9 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          # We need to fetch all history to retrieve the latest tag
+          fetch-depth: 0
 
       - name: Install Python 3.10
         uses: actions/setup-python@v3
