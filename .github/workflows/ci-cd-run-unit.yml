@@ -31,3 +31,11 @@ jobs:
 
       - name: Prepare coverage report
         run: poetry run coverage report -m
+
+      - name: Upload coverage report do Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage.xml
+          flags: unit
+          fail_ci_if_error: true
+          verbose: true
