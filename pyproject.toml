@@ -9,5 +9,5 @@ line-length = 120
 include = '\.pyi?$'
 
 [flake8]
-max-line-length = 121
+max-line-length = 120
 additional-dependencies = [ "pep8-naming", "flake8-black", "flake8-import-order", "flake8-annotations" ]
