@@ -2,7 +2,7 @@
 authors = ["Rafal Jankowski <rafal@jankovsky.dev>"]
 description = "EA F1 2021 telemetry integration with Neptune.ai"
 homepage = "https://github.com/Raalsky/neptune-f1"
-include = ["CHANGELOG.md", "CODE_OF_CONDUCT.md"]
+include = ["CHANGELOG.md"]
 license = "MIT"
 maintainers = ["Rafal Jankowski <rafal@jankovsky.dev>"]
 name = "neptune-f1"
