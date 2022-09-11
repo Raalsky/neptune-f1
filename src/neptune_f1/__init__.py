@@ -1,3 +1,7 @@
-from importlib.metadata import version
+from importlib.metadata import PackageNotFoundError, version
 
-__version__ = version("neptune-f1")
+try:
+    __version__ = version("neptune-f1")
+except PackageNotFoundError:
+    # package is not installed
+    pass

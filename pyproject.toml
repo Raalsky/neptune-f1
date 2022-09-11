@@ -7,7 +7,7 @@ license = "MIT"
 maintainers = ["Rafal Jankowski <rafal@jankovsky.dev>"]
 name = "neptune-f1"
 readme = "README.md"
-version = "0.1.0"
+version = "0.0.0"
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -16,9 +16,14 @@ python = "^3.10"
 pre-commit = "^2.20.0"
 pytest = "^7.1.3"
 
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+pattern = "^(?:[\\w-]+-)?(?P<base>[vV]?\\d+(?:\\.\\d+){0,2}[^\\+]*)(?:\\+.*)?$"
+
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
 
 [tool.isort]
 profile = "black"
@@ -32,9 +37,4 @@ include = '\.pyi?$'
 
 [flake8]
 max-line-length = 120
-additional-dependencies = [
-    "pep8-naming",
-    "flake8-black",
-    "flake8-import-order",
-    "flake8-annotations"
-]
+additional-dependencies = ["pep8-naming", "flake8-black", "flake8-import-order", "flake8-annotations"]
