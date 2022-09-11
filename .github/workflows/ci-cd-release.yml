@@ -1,16 +1,23 @@
 name: release
 
 on:
-  workflow_run:
-    workflows: [ 'mypy', 'functional', 'integration', 'unit', 'pre-commit' ]
-    types:
-      - completed
+  pull_request:
+  push:
+    branches: [master]
 
 jobs:
   pypi:
     runs-on: ubuntu-latest
 #    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
     steps:
+      - name: Wait for other checks to succeed
+        uses: lewagon/wait-on-check-action@v1.0.0
+        with:
+          ref: ${{ github.ref }}
+          running-workflow-name: 'Publish the package'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
