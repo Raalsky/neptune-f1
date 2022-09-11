@@ -1,4 +1,4 @@
-name: functional-tests
+name: integration
 
 on:
   pull_request:
@@ -26,8 +26,8 @@ jobs:
       - name: Install package
         run: poetry install --with dev
 
-      - name: Run functional tests
-        run: poetry run coverage run --source='src/' -m behave
+      - name: Run integration tests
+        run: poetry run coverage run --source='src/' -m pytest tests/integration
 
       - name: Prepare coverage report
         run: poetry run coverage report -m
