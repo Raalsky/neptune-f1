@@ -1,4 +1,4 @@
-name: unit-integration
+name: unit
 
 on:
   pull_request:
@@ -26,5 +26,16 @@ jobs:
       - name: Install package
         run: poetry install --with dev
 
-      - name: Run tests
-        run: poetry run pytest
+      - name: Run unit tests
+        run: poetry run coverage run --source='src/' -m pytest tests/unit
+
+      - name: Prepare coverage report
+        run: poetry run coverage xml
+
+      - name: Upload coverage report do Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          flags: unit
+          fail_ci_if_error: true
