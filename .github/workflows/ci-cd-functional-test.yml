@@ -1,9 +1,12 @@
-name: integration
+name: functional
 
 on:
   pull_request:
   push:
-    branches: [master]
+    branches:
+      - master
+    tags:
+      - "*"
 
 jobs:
   test:
@@ -26,8 +29,8 @@ jobs:
       - name: Install package
         run: poetry install --with dev
 
-      - name: Run integration tests
-        run: poetry run coverage run --source='src/' -m pytest tests/integration
+      - name: Run functional tests
+        run: poetry run coverage run --source='src/' -m behave
 
       - name: Prepare coverage report
         run: poetry run coverage xml
@@ -37,5 +40,5 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage.xml
-          flags: integration
+          flags: functional
           fail_ci_if_error: true

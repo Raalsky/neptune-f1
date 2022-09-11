@@ -3,7 +3,10 @@ name: mypy
 on:
   pull_request:
   push:
-    branches: [master]
+    branches:
+      - master
+    tags:
+      - "*"
 
 jobs:
   mypy:
