@@ -30,4 +30,12 @@ jobs:
         run: poetry run coverage run --source='src/' -m behave
 
       - name: Prepare coverage report
-        run: poetry run coverage report -m
+        run: poetry run coverage xml
+
+      - name: Upload coverage report do Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          flags: functional
+          fail_ci_if_error: true
