@@ -35,7 +35,9 @@ jobs:
       - name: Upload coverage report do Codecov
         uses: codecov/codecov-action@v3
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage.xml
           flags: unit
-          fail_ci_if_error: true
-          verbose: true
+#          name: codecov-umbrella # optional
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
