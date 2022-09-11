@@ -1,11 +1,13 @@
 [tool.poetry]
-name = "neptune-f1"
-version = "0.1.0"
+authors = ["Rafal Jankowski <rafal@jankovsky.dev>"]
 description = "EA F1 2021 telemetry integration with Neptune.ai"
 homepage = "https://github.com/Raalsky/neptune-f1"
-authors = ["Rafal Jankowski <rafal@jankovsky.dev>"]
+include = ["CHANGELOG.md", "CODE_OF_CONDUCT.md"]
 license = "MIT"
+maintainers = ["Rafal Jankowski <rafal@jankovsky.dev>"]
+name = "neptune-f1"
 readme = "README.md"
+version = "0.1.0"
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -30,4 +32,9 @@ include = '\.pyi?$'
 
 [flake8]
 max-line-length = 120
-additional-dependencies = [ "pep8-naming", "flake8-black", "flake8-import-order", "flake8-annotations" ]
+additional-dependencies = [
+    "pep8-naming",
+    "flake8-black",
+    "flake8-import-order",
+    "flake8-annotations"
+]
