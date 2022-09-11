@@ -11,8 +11,6 @@ repos:
       - id: detect-private-key
       - id: end-of-file-fixer
       - id: mixed-line-ending
-      - id: name-tests-test
-        args: [ '--pytest-test-first' ]
       - id: pretty-format-json
       - id: requirements-txt-fixer
       - id: trailing-whitespace
