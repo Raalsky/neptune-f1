@@ -22,7 +22,8 @@ coverage = "^6.4.4"
 [tool.poetry-dynamic-versioning]
 enable = true
 vcs = "git"
-pattern = "^(?:[\\w-]+-)?(?P<base>[vV]?\\d+(?:\\.\\d+){0,2}[^\\+]*)(?:\\+.*)?$"
+style = "semver"
+pattern = "default-unprefixed"
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]

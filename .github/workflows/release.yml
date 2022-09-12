@@ -39,7 +39,7 @@ jobs:
         run: git describe --tags
 
       - name: Build package
-        run: poetry build
+        run: poetry version
 
 #      - name: Uploading to test PyPI
 #        uses: pypa/gh-action-pypi-publish@release/v1
