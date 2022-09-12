@@ -1,0 +1,17 @@
+---
+name: Coverage
+description: Gather and report coverage to Codecov
+runs:
+    using: "composite"
+    steps:
+      - name: Prepare coverage report
+        run: poetry run coverage xml
+        shell: bash
+
+      - name: Upload coverage report do Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          flags: functional
+          fail_ci_if_error: true
