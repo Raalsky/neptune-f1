@@ -2,8 +2,8 @@ name: release
 
 on:
   push:
-    tags:
-      - "*"
+    branches:
+      - master
 
 jobs:
   pypi:
@@ -50,6 +50,9 @@ jobs:
 
       - name: Build package with pip
         run: python -m build --sdist --wheel
+
+      - name: List directory
+        run: ls
 
       - name: Build package
         run: |
