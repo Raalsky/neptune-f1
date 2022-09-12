@@ -7,16 +7,16 @@ on:
 
 jobs:
   pypi:
-    name: Publish the package
+    name: publish
     runs-on: ubuntu-latest
     steps:
-#      - name: Wait for other checks to succeed
-#        uses: lewagon/wait-on-check-action@v1.0.0
-#        with:
-#          ref: ${{ github.ref }}
-#          running-workflow-name: 'Publish the package'
-#          repo-token: ${{ secrets.GITHUB_TOKEN }}
-#          wait-interval: 10
+      - name: Wait for other checks to succeed
+        uses: lewagon/wait-on-check-action@v1.0.0
+        with:
+          ref: ${{ github.ref }}
+          running-workflow-name: 'publish'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
 
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -38,9 +38,9 @@ jobs:
           user: __token__
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
-#
-#      - name: Uploading to PyPI
-#        uses: pypa/gh-action-pypi-publish@release/v1
-#        with:
-#          user: __token__
-#          password: ${{ secrets.PYPI_API_TOKEN }}
+
+      - name: Uploading to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}

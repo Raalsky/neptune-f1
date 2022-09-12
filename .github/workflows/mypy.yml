@@ -2,11 +2,11 @@ name: mypy
 
 on:
   pull_request:
-#  push:
-#    branches:
-#      - master
-#    tags:
-#      - "*"
+  push:
+    branches:
+      - master
+    tags:
+      - "*"
 
 jobs:
   mypy:
