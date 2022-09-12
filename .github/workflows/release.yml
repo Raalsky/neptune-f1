@@ -54,6 +54,9 @@ jobs:
       - name: List directory
         run: ls -a
 
+      - name: JJJ
+        run: echo $VENV
+
       - name: Build package
         run: |
           source .venv/bin/activate
