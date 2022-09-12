@@ -34,8 +34,9 @@ jobs:
 
       - name: Build package
         run: |
-          pip install build poetry-dynamic-versioning
+          pip install build poetry-dynamic-versioning poetry
           python -m build --sdist --wheel
+          poetry build
           ls -a
           pwd
 
