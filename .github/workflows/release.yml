@@ -36,7 +36,7 @@ jobs:
           installer-parallel: true
 
       - name: Git log
-        run: git log -n 10
+        run: git describe --tags
 
       - name: Build package
         run: poetry build
