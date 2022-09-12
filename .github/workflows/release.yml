@@ -38,6 +38,9 @@ jobs:
       - name: Git log
         run: git describe --tags
 
+      - name: Install package
+        run: pip install -e .
+
       - name: Build package
         run: poetry version
 
