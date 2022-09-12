@@ -52,7 +52,7 @@ jobs:
         run: python -m build --sdist --wheel
 
       - name: List directory
-        run: ls
+        run: ls -a
 
       - name: Build package
         run: |
