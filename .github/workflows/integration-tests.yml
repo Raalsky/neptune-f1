@@ -27,3 +27,4 @@ jobs:
         uses: ./.github/actions/coverage
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          flags: integration
