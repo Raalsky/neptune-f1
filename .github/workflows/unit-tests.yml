@@ -17,27 +17,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install Python 3.10
-        uses: actions/setup-python@v3
-        with:
-          python-version: "3.10"
-
-      - name: Install build dependencies
-        run: pip install poetry poetry-dynamic-versioning
-
-      - name: Install package
-        run: poetry install --with dev
+      - name: Prepare package
+        uses: ./.github/actions/package
 
       - name: Run unit tests
         run: poetry run coverage run --source='src/' -m pytest tests/unit
 
-      - name: Prepare coverage report
-        run: poetry run coverage xml
-
-      - name: Upload coverage report do Codecov
-        uses: codecov/codecov-action@v3
+      - name: Coverage report
+        uses: ./.github/actions/coverage
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage.xml
-          flags: unit
-          fail_ci_if_error: true
