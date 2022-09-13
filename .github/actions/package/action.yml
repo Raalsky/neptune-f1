@@ -4,11 +4,6 @@ description: Install python and package
 runs:
     using: "composite"
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
       - name: Install Python 3.10
         uses: actions/setup-python@v3
         with:
