@@ -1,5 +1,9 @@
 ---
 name: Coverage
+inputs:
+  token:
+     description: "Codecov token"
+     required: true
 description: Gather and report coverage to Codecov
 runs:
     using: "composite"
@@ -11,7 +15,7 @@ runs:
       - name: Upload coverage report do Codecov
         uses: codecov/codecov-action@v3
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{ inputs.token }}
           files: ./coverage.xml
           flags: functional
           fail_ci_if_error: true

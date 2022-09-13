@@ -25,3 +25,5 @@ jobs:
 
       - name: Coverage report
         uses: ./.github/actions/coverage
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
