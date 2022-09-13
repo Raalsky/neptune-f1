@@ -4,6 +4,9 @@ inputs:
   token:
      description: "Codecov token"
      required: true
+  flags:
+     description: "Test type"
+     required: true
 description: Gather and report coverage to Codecov
 runs:
     using: "composite"
@@ -17,5 +20,5 @@ runs:
         with:
           token: ${{ inputs.token }}
           files: ./coverage.xml
-          flags: functional
+          flags: ${{ inputs.flags }}
           fail_ci_if_error: true
