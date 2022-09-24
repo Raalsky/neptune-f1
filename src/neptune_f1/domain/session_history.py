@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from neptune_f1.packets.f12021 import LapHistoryData, TyreStintHistoryData
+from neptune_f1.packets.f12021_old import LapHistoryData, TyreStintHistoryData
 
 
 @dataclass

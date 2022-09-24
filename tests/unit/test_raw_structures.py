@@ -2,7 +2,7 @@ import ctypes
 
 import pytest
 
-from neptune_f1.packets.f12021 import (
+from neptune_f1.packets.f12021_old import (
     Buttons,
     CarDamageData,
     CarMotionData,
