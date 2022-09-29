@@ -1,7 +1,9 @@
 import ctypes
 
-from .packet_header import PacketHeader
-from .utils import Packet
+from neptune_f1.packets.codemasters_f12021.header import PacketHeader
+from neptune_f1.packets.codemasters_f12021.utils import Packet
+
+__all__ = ["PacketCarStatusData"]
 
 
 class CarStatusData(Packet):
@@ -30,30 +32,23 @@ class CarStatusData(Packet):
         ("m_max_gears", ctypes.c_uint8),
         # 0 = not allowed, 1 = allowed
         ("m_drs_allowed", ctypes.c_uint8),
-        # 0 = DRS not available, non-zero - DRS will be available
-        # in [X] metres
+        # 0 = DRS not available, non-zero - DRS will be available in [X] metres
         ("m_drs_activation_distance", ctypes.c_uint16),
-        # F1 Modern - 16 = C5, 17 = C4, 18 = C3, 19 = C2, 20 = C1
-        # 7 = inter, 8 = wet
-        # F1 Classic - 9 = dry, 10 = wet
-        # F2 – 11 = super soft, 12 = soft, 13 = medium, 14 = hard
-        # 15 = wet
+        # F1 Modern - 16 = C5, 17 = C4, 18 = C3, 19 = C2, 20 = C1 7 = inter, 8 = wet
+        # F1 Classic - 9 = dry, 10 = wet F2 – 11 = super soft, 12 = soft, 13 = medium, 14 = hard 15 = wet
         ("m_actual_tyre_compound", ctypes.c_uint8),
-        # F1 visual (can be different from actual compound)
-        # 16 = soft, 17 = medium, 18 = hard, 7 = inter, 8 = wet
+        # F1 visual (can be different from actual compound) 16 = soft,
+        # 17 = medium, 18 = hard, 7 = inter, 8 = wet
         # F1 Classic – same as above
-        # F2 ‘19, 15 = wet, 19 – super soft, 20 = soft
-        # 21 = medium , 22 = hard
+        # F2 ‘19, 15 = wet, 19 – super soft, 20 = soft 21 = medium , 22 = hard
         ("m_visual_tyre_compound", ctypes.c_uint8),
         # Age in laps of the current set of tyres
         ("m_tyres_age_laps", ctypes.c_uint8),
-        # -1 = invalid/unknown, 0 = none, 1 = green
-        # 2 = blue, 3 = yellow, 4 = red
+        # -1 = invalid/unknown, 0 = none, 1 = green 2 = blue, 3 = yellow, 4 = red
         ("m_vehicle_fia_flags", ctypes.c_int8),
         # ERS energy store in Joules
         ("m_ers_store_energy", ctypes.c_float),
-        # ERS deployment mode, 0 = none, 1 = medium
-        # 2 = hotlap, 3 = overtake
+        # ERS deployment mode, 0 = none, 1 = medium 2 = hotlap, 3 = overtake
         ("m_ers_deploy_mode", ctypes.c_uint8),
         # ERS energy harvested this lap by MGU-K
         ("m_ers_harvested_this_lap_mguk", ctypes.c_float),
@@ -71,6 +66,5 @@ class PacketCarStatusData(Packet):
     _fields_ = [
         # Header
         ("m_header", PacketHeader),
-        # Car status data array
         ("m_car_status_data", CarStatusData * 22),
     ]

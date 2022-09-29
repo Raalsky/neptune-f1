@@ -1,7 +1,9 @@
 import ctypes
 
-from .packet_header import PacketHeader
-from .utils import Packet
+from neptune_f1.packets.codemasters_f12021.header import PacketHeader
+from neptune_f1.packets.codemasters_f12021.utils import Packet
+
+__all__ = ["PacketCarDamageData"]
 
 
 class CarDamageData(Packet):
@@ -50,6 +52,5 @@ class PacketCarDamageData(Packet):
     _fields_ = [
         # Header
         ("m_header", PacketHeader),
-        # Car damage data array
         ("m_car_damage_data", CarDamageData * 22),
     ]

@@ -1,7 +1,9 @@
 import ctypes
 
-from .packet_header import PacketHeader
-from .utils import Packet
+from neptune_f1.packets.codemasters_f12021.header import PacketHeader
+from neptune_f1.packets.codemasters_f12021.utils import Packet
+
+__all__ = ["PacketSessionHistoryData"]
 
 
 class LapHistoryData(Packet):
@@ -14,8 +16,10 @@ class LapHistoryData(Packet):
         ("m_sector2_time_in_ms", ctypes.c_uint16),
         # Sector 3 time in milliseconds
         ("m_sector3_time_in_ms", ctypes.c_uint16),
-        # 0x01 bit set-lap valid,      0x02 bit set-sector 1 valid
-        # 0x04 bit set-sector 2 valid, 0x08 bit set-sector 3 valid
+        # 0x01 bit set-lap valid,
+        # 0x02 bit set-sector 1 valid
+        # 0x04 bit set-sector 2 valid,
+        # 0x08 bit set-sector 3 valid
         ("m_lap_valid_bit_flags", ctypes.c_uint8),
     ]
 
@@ -52,6 +56,5 @@ class PacketSessionHistoryData(Packet):
         ("m_best_sector3_lap_num", ctypes.c_uint8),
         # 100 laps of data max
         ("m_lap_history_data", LapHistoryData * 100),
-        # Tyre stints history array
         ("m_tyre_stints_history_data", TyreStintHistoryData * 8),
     ]

@@ -1,10 +1,12 @@
 import ctypes
 
-from .packet_header import PacketHeader
-from .utils import Packet
+from neptune_f1.packets.codemasters_f12021.header import PacketHeader
+from neptune_f1.packets.codemasters_f12021.utils import Packet
+
+__all__ = ["PacketSessionData"]
 
 
-class MarshalZone(Packet):
+class MarshalZone:
     _fields_ = [
         # Fraction (0..1) of way through the lap the marshal zone starts
         ("m_zone_start", ctypes.c_float),
@@ -13,7 +15,7 @@ class MarshalZone(Packet):
     ]
 
 
-class WeatherForecastSample(Packet):
+class WeatherForecastSample:
     _fields_ = [
         # 0 = unknown, 1 = P1, 2 = P2, 3 = P3, 4 = Short P, 5 = Q1
         # 6 = Q2, 7 = Q3, 8 = Short Q, 9 = OSQ, 10 = R, 11 = R2

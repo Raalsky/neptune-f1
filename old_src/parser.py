@@ -1,8 +1,9 @@
 import pathlib
 import typing
 
-from telemetry.packets.f12021.utils import Packet
-from telemetry.packets.factory import PacketFactory
+from neptune_f1.packets.codemasters_f12021.utils import Packet
+
+from .factory import PacketFactory
 
 
 class Parser:
