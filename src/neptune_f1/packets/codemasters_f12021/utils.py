@@ -89,7 +89,7 @@ class PacketDataBunch:
 
 class Packet(ctypes.LittleEndianStructure, PacketDataBunch):
     _pack_ = 1
-    _id_ = None
+    _id_ = -1
     _version_ = 1
     _format_ = 2021
 
