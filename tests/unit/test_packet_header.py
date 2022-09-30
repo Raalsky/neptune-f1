@@ -5,6 +5,43 @@ import pytest
 from neptune_f1.packets.codemasters_f12021.packet_header import PacketHeader
 
 
+@pytest.fixture
+def data():
+    return {
+        "m_packet_format": 2021,
+        "m_game_major_version": 1,
+        "m_game_minor_version": 23,
+        "m_packet_version": 25,
+        "m_packet_id": 2,
+        "m_session_uid": 2501,
+        "m_session_time": 25.01,
+        "m_frame_identifier": 123,
+        "m_player_car_index": 6,
+        "m_secondary_player_car_index": 255,
+    }
+
+
+@pytest.fixture
+def json_representation():
+    return """{
+  "m_frame_identifier": 123,
+  "m_game_major_version": 1,
+  "m_game_minor_version": 23,
+  "m_packet_format": 2021,
+  "m_packet_id": 2,
+  "m_packet_version": 25,
+  "m_player_car_index": 6,
+  "m_secondary_player_car_index": 255,
+  "m_session_time": 25.01,
+  "m_session_uid": 2501
+}"""
+
+
+@pytest.fixture
+def binary():
+    return b"\xe5\x07\x01\x17\x19\x02\xc5\x09\x00\x00\x00\x00\x00" b"\x00\x7b\x14\xc8\x41\x7b\x00\x00\x00\x06\xff"
+
+
 @pytest.mark.parametrize(
     "type_name, type_class",
     [
@@ -35,3 +72,34 @@ def test_packet_header__field__types(type_name, type_class):
     packet_type = PacketHeader()
 
     assert (type_name, type_class) in packet_type._fields_
+
+
+def test_packet_header__to_dict(data):
+    packet = PacketHeader(**data)
+
+    assert packet.to_dict() == data
+
+
+def test_packet_header__get_value(data):
+    packet = PacketHeader(**data)
+
+    for field, value in data.items():
+        assert packet.get_value(field=field) == value
+
+
+def test_packet_header__to_json(data, json_representation):
+    packet = PacketHeader(**data)
+
+    assert packet.to_json() == json_representation
+
+
+def test_packet_header__to_binary(data, binary):
+    packet = PacketHeader(**data)
+
+    assert packet.pack() == binary
+
+
+def test_packet_header__from_binary(data, binary):
+    packet = PacketHeader.unpack(binary)
+
+    assert packet.to_dict() == data
