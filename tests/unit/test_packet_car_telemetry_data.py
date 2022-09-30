@@ -1,13 +1,14 @@
 import ctypes
 
+import pytest
+
+from neptune_f1.packets.codemasters_f12021.packet_car_telemetry_data import CarTelemetryData, PacketCarTelemetryData
 from neptune_f1.packets.codemasters_f12021.packet_header import PacketHeader
-from neptune_f1.packets.codemasters_f12021.utils import Packet
-
-__all__ = ["PacketCarTelemetryData"]
 
 
-class CarTelemetryData(Packet):
-    _fields_ = [
+@pytest.mark.parametrize(
+    "type_name, type_class",
+    [
         # Speed of car in kilometres per hour
         ("m_speed", ctypes.c_uint16),
         # Amount of throttle applied (0.0 to 1.0)
@@ -40,21 +41,33 @@ class CarTelemetryData(Packet):
         ("m_tyres_pressure", ctypes.c_float * 4),
         # Driving surface, see appendices
         ("m_surface_type", ctypes.c_uint8 * 4),
-    ]
+    ],
+)
+def test_car_telemetry_data__field__types(type_name, type_class):
+    packet_type = CarTelemetryData()
+
+    assert (type_name, type_class) in packet_type._fields_
 
 
-class PacketCarTelemetryData(Packet):
-    _id_ = 6
-    _fields_ = [
+@pytest.mark.parametrize(
+    "type_name, type_class",
+    [
         # Header
         ("m_header", PacketHeader),
+        # Index of MFD panel open - 255 = MFD closed
+        # Single player, race – 0 = Car setup, 1 = Pits
+        # 2 = Damage, 3 =  Engine, 4 = Temperatures
+        # May vary depending on game mode
         ("m_car_telemetry_data", CarTelemetryData * 22),
-        # Index of MFD panel open - 255 = MFD closed Single player,
-        # race – 0 = Car setup, 1 = Pits 2 = Damage, 3 =  Engine,
-        # 4 = Temperatures May vary depending on game mode
-        ("m_mfd_panel_index", ctypes.c_uint8),
         # See above
+        ("m_mfd_panel_index", ctypes.c_uint8),
         ("m_mfd_panel_index_secondary_player", ctypes.c_uint8),
-        # Suggested gear for the player (1-8) 0 if no gear suggested
+        # Suggested gear for the player (1-8)
+        # 0 if no gear suggested
         ("m_suggested_gear", ctypes.c_int8),
-    ]
+    ],
+)
+def test_packet_car_telemetry_data__field__types(type_name, type_class):
+    packet_type = PacketCarTelemetryData()
+
+    assert (type_name, type_class) in packet_type._fields_

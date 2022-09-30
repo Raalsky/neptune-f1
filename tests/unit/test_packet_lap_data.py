@@ -1,13 +1,14 @@
 import ctypes
 
+import pytest
+
 from neptune_f1.packets.codemasters_f12021.packet_header import PacketHeader
-from neptune_f1.packets.codemasters_f12021.utils import Packet
-
-__all__ = ["PacketLapData"]
+from neptune_f1.packets.codemasters_f12021.packet_lap_data import LapData, PacketLapData
 
 
-class LapData(Packet):
-    _fields_ = [
+@pytest.mark.parametrize(
+    "type_name, type_class",
+    [
         # Last lap time in milliseconds
         ("m_last_lap_time_in_ms", ctypes.c_uint32),
         # Current time around the lap in milliseconds
@@ -16,11 +17,11 @@ class LapData(Packet):
         ("m_sector1_time_in_ms", ctypes.c_uint16),
         # Sector 2 time in milliseconds
         ("m_sector2_time_in_ms", ctypes.c_uint16),
-        # Distance vehicle is around current lap in metres – could be negative if line
-        # hasn’t been crossed yet
+        # Distance vehicle is around current lap in metres – could
+        # be negative if line hasn’t been crossed yet
         ("m_lap_distance", ctypes.c_float),
-        # Total distance travelled in session in metres – could be negative if line
-        # hasn’t been crossed yet
+        # Total distance travelled in session in metres – could
+        # be negative if line hasn’t been crossed yet
         ("m_total_distance", ctypes.c_float),
         # Delta in seconds for safety car
         ("m_safety_car_delta", ctypes.c_float),
@@ -46,11 +47,12 @@ class LapData(Packet):
         ("m_num_unserved_stop_go_pens", ctypes.c_uint8),
         # Grid position the vehicle started the race in
         ("m_grid_position", ctypes.c_uint8),
-        # Status of driver - 0 = in garage, 1 = flying lap 2 = in lap,
-        # 3 = out lap, 4 = on track
+        # Status of driver - 0 = in garage, 1 = flying lap
+        # 2 = in lap, 3 = out lap, 4 = on track
         ("m_driver_status", ctypes.c_uint8),
-        # Result status - 0 = invalid, 1 = inactive, 2 = active 3 = finished,
-        # 4 = didnotfinish, 5 = disqualified 6 = not classified, 7 = retired
+        # Result status - 0 = invalid, 1 = inactive, 2 = active
+        # 3 = finished, 4 = didnotfinish, 5 = disqualified
+        # 6 = not classified, 7 = retired
         ("m_result_status", ctypes.c_uint8),
         # Pit lane timing, 0 = inactive, 1 = active
         ("m_pit_lane_timer_active", ctypes.c_uint8),
@@ -60,14 +62,24 @@ class LapData(Packet):
         ("m_pit_stop_timer_in_ms", ctypes.c_uint16),
         # Whether the car should serve a penalty at this stop
         ("m_pit_stop_should_serve_pen", ctypes.c_uint8),
-    ]
+    ],
+)
+def test_lap_data__field__types(type_name, type_class):
+    packet_type = LapData()
+
+    assert (type_name, type_class) in packet_type._fields_
 
 
-class PacketLapData(Packet):
-    _id_ = 2
-    _fields_ = [
+@pytest.mark.parametrize(
+    "type_name, type_class",
+    [
         # Header
         ("m_header", PacketHeader),
         # Lap data for all cars on track
         ("m_lap_data", LapData * 22),
-    ]
+    ],
+)
+def test_packet_lap_data__field__types(type_name, type_class):
+    packet_type = PacketLapData()
+
+    assert (type_name, type_class) in packet_type._fields_

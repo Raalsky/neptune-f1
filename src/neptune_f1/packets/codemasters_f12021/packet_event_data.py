@@ -1,6 +1,6 @@
 import ctypes
 
-from neptune_f1.packets.codemasters_f12021.header import PacketHeader
+from neptune_f1.packets.codemasters_f12021.packet_header import PacketHeader
 from neptune_f1.packets.codemasters_f12021.utils import Packet, PacketDataBunch
 
 __all__ = ["PacketEventData"]

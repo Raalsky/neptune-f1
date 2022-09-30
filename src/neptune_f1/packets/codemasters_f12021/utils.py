@@ -45,7 +45,7 @@ def format_type(value):
     return value
 
 
-class PacketDataBunch(ctypes.LittleEndianStructure):
+class PacketDataBunch:
     def get_value(self, field):
         """Returns the field's value and formats the types value"""
         return format_type(getattr(self, field))
@@ -87,7 +87,7 @@ class PacketDataBunch(ctypes.LittleEndianStructure):
         return self.to_json()
 
 
-class Packet(PacketDataBunch):
+class Packet(ctypes.LittleEndianStructure, PacketDataBunch):
     _pack_ = 1
     _id_ = None
     _version_ = 1

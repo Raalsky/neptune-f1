@@ -1,13 +1,14 @@
 import ctypes
 
+import pytest
+
+from neptune_f1.packets.codemasters_f12021.packet_car_damage_data import CarDamageData, PacketCarDamageData
 from neptune_f1.packets.codemasters_f12021.packet_header import PacketHeader
-from neptune_f1.packets.codemasters_f12021.utils import Packet
-
-__all__ = ["PacketCarDamageData"]
 
 
-class CarDamageData(Packet):
-    _fields_ = [
+@pytest.mark.parametrize(
+    "type_name, type_class",
+    [
         # Tyre wear (percentage)
         ("m_tyres_wear", ctypes.c_float * 4),
         # Tyre damage (percentage)
@@ -44,13 +45,23 @@ class CarDamageData(Packet):
         ("m_engine_mgukwear", ctypes.c_uint8),
         # Engine wear TC (percentage)
         ("m_engine_tcwear", ctypes.c_uint8),
-    ]
+    ],
+)
+def test_car_damage_data__field__types(type_name, type_class):
+    packet_type = CarDamageData()
+
+    assert (type_name, type_class) in packet_type._fields_
 
 
-class PacketCarDamageData(Packet):
-    _id_ = 10
-    _fields_ = [
+@pytest.mark.parametrize(
+    "type_name, type_class",
+    [
         # Header
         ("m_header", PacketHeader),
         ("m_car_damage_data", CarDamageData * 22),
-    ]
+    ],
+)
+def test_packet_car_damage_data__field__types(type_name, type_class):
+    packet_type = PacketCarDamageData()
+
+    assert (type_name, type_class) in packet_type._fields_

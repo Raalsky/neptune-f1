@@ -1,22 +1,33 @@
 import ctypes
 
+import pytest
+
 from neptune_f1.packets.codemasters_f12021.packet_header import PacketHeader
-from neptune_f1.packets.codemasters_f12021.utils import Packet
+from neptune_f1.packets.codemasters_f12021.packet_session_data import (
+    MarshalZone,
+    PacketSessionData,
+    WeatherForecastSample,
+)
 
-__all__ = ["PacketSessionData"]
 
-
-class MarshalZone(Packet):
-    _fields_ = [
+@pytest.mark.parametrize(
+    "type_name, type_class",
+    [
         # Fraction (0..1) of way through the lap the marshal zone starts
         ("m_zone_start", ctypes.c_float),
         # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         ("m_zone_flag", ctypes.c_int8),
-    ]
+    ],
+)
+def test_marshal_zone__field__types(type_name, type_class):
+    packet_type = MarshalZone()
+
+    assert (type_name, type_class) in packet_type._fields_
 
 
-class WeatherForecastSample(Packet):
-    _fields_ = [
+@pytest.mark.parametrize(
+    "type_name, type_class",
+    [
         # 0 = unknown, 1 = P1, 2 = P2, 3 = P3, 4 = Short P, 5 = Q1
         # 6 = Q2, 7 = Q3, 8 = Short Q, 9 = OSQ, 10 = R, 11 = R2
         # 12 = Time Trial
@@ -36,12 +47,17 @@ class WeatherForecastSample(Packet):
         ("m_air_temperature_change", ctypes.c_int8),
         # Rain percentage (0-100)
         ("m_rain_percentage", ctypes.c_uint8),
-    ]
+    ],
+)
+def test_weather_forecast_sample__field__types(type_name, type_class):
+    packet_type = WeatherForecastSample()
+
+    assert (type_name, type_class) in packet_type._fields_
 
 
-class PacketSessionData(Packet):
-    _id_ = 1
-    _fields_ = [
+@pytest.mark.parametrize(
+    "type_name, type_class",
+    [
         # Header
         ("m_header", PacketHeader),
         # Weather - 0 = clear, 1 = light cloud, 2 = overcast
@@ -125,4 +141,9 @@ class PacketSessionData(Packet):
         ("m_dynamic_racing_line", ctypes.c_uint8),
         # 0 = 2D, 1 = 3D
         ("m_dynamic_racing_line_type", ctypes.c_uint8),
-    ]
+    ],
+)
+def test_packet_session_data__field__types(type_name, type_class):
+    packet_type = PacketSessionData()
+
+    assert (type_name, type_class) in packet_type._fields_

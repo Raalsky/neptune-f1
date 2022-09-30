@@ -1,13 +1,14 @@
 import ctypes
 
+import pytest
+
 from neptune_f1.packets.codemasters_f12021.packet_header import PacketHeader
-from neptune_f1.packets.codemasters_f12021.utils import Packet
-
-__all__ = ["PacketMotionData"]
+from neptune_f1.packets.codemasters_f12021.packet_motion_data import CarMotionData, PacketMotionData
 
 
-class CarMotionData(Packet):
-    _fields_ = [
+@pytest.mark.parametrize(
+    "type_name, type_class",
+    [
         # World space X position
         ("m_world_position_x", ctypes.c_float),
         # World space Y position
@@ -44,22 +45,26 @@ class CarMotionData(Packet):
         ("m_pitch", ctypes.c_float),
         # Roll angle in radians
         ("m_roll", ctypes.c_float),
-    ]
+    ],
+)
+def test_car_motion_data__field__types(type_name, type_class):
+    packet_type = CarMotionData()
+
+    assert (type_name, type_class) in packet_type._fields_
 
 
-class PacketMotionData(Packet):
-    _id_ = 0
-    _fields_ = [
+@pytest.mark.parametrize(
+    "type_name, type_class",
+    [
         # Header
         ("m_header", PacketHeader),
         # Data for all cars on track
         ("m_car_motion_data", CarMotionData * 22),
         # Extra player car ONLY data
         # Note: All wheel arrays have the following order:
+        # RL, RR, FL, FR
         ("m_suspension_position", ctypes.c_float * 4),
-        # RL, RR, FL, FR
         ("m_suspension_velocity", ctypes.c_float * 4),
-        # RL, RR, FL, FR
         ("m_suspension_acceleration", ctypes.c_float * 4),
         # Speed of each wheel
         ("m_wheel_speed", ctypes.c_float * 4),
@@ -85,4 +90,9 @@ class PacketMotionData(Packet):
         ("m_angular_acceleration_z", ctypes.c_float),
         # Current front wheels angle in radians
         ("m_front_wheels_angle", ctypes.c_float),
-    ]
+    ],
+)
+def test_packet_motion_data__field__types(type_name, type_class):
+    packet_type = PacketMotionData()
+
+    assert (type_name, type_class) in packet_type._fields_
