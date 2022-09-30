@@ -44,3 +44,6 @@ repos:
     hooks:
     -   id: mypy
         args: [ --config, pyproject.toml ]
+exclude: old_src/
+default_language_version:
+    python: python3
