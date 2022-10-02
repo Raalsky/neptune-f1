@@ -6,7 +6,7 @@ from neptune_f1.packets.codemasters_f12021.packet_car_damage_data import CarDama
 from neptune_f1.packets.codemasters_f12021.packet_header import PacketHeader
 
 
-def single_car_damage():
+def single():
     return CarDamageData(
         m_brakes_damage=(ctypes.c_uint8 * 4)(10, 20, 30, 40),
         m_diffuser_damage=0,
@@ -29,7 +29,7 @@ def single_car_damage():
     )
 
 
-def single_car_damage__dict_representation():
+def single__dict_representation():
     return {
         "m_brakes_damage": [10, 20, 30, 40],
         "m_diffuser_damage": 0,
@@ -52,45 +52,7 @@ def single_car_damage__dict_representation():
     }
 
 
-@pytest.fixture
-def packet():
-    return PacketCarDamageData(
-        m_header=PacketHeader(
-            m_packet_format=2021,
-            m_game_major_version=1,
-            m_game_minor_version=23,
-            m_packet_version=25,
-            m_packet_id=10,
-            m_session_uid=2501,
-            m_session_time=25.01,
-            m_frame_identifier=123,
-            m_player_car_index=6,
-            m_secondary_player_car_index=255,
-        ),
-        m_car_damage_data=(CarDamageData * 22)(*[single_car_damage() for _ in range(22)]),
-    )
-
-
-@pytest.fixture
-def dict_representation():
-    return {
-        "m_header": {
-            "m_packet_format": 2021,
-            "m_game_major_version": 1,
-            "m_game_minor_version": 23,
-            "m_packet_version": 25,
-            "m_packet_id": 10,
-            "m_session_uid": 2501,
-            "m_session_time": 25.01,
-            "m_frame_identifier": 123,
-            "m_player_car_index": 6,
-            "m_secondary_player_car_index": 255,
-        },
-        "m_car_damage_data": [single_car_damage__dict_representation() for _ in range(22)],
-    }
-
-
-def single_car_damage__json_representation():
+def single__json_representation():
     return """{
       "m_brakes_damage": [
         10,
@@ -128,9 +90,54 @@ def single_car_damage__json_representation():
     }"""
 
 
+def single__binary_representation():
+    return (
+        b"\x00\x00\x00\x00\x00\x00\x80\x3f\x00\x00\x00\x3f\x00\x00\x00\x00\x0a\x14\x1e\x28\x0a\x14\x1e\x28\x14"
+        b"\x28\x04\x0c\x00\x13\x01\x26\x14\x32\x1e\x0a\x28\x3c\x46"
+    )
+
+
+@pytest.fixture
+def packet():
+    return PacketCarDamageData(
+        m_header=PacketHeader(
+            m_packet_format=2021,
+            m_game_major_version=1,
+            m_game_minor_version=23,
+            m_packet_version=25,
+            m_packet_id=10,
+            m_session_uid=2501,
+            m_session_time=25.01,
+            m_frame_identifier=123,
+            m_player_car_index=6,
+            m_secondary_player_car_index=255,
+        ),
+        m_car_damage_data=(CarDamageData * 22)(*[single() for _ in range(22)]),
+    )
+
+
+@pytest.fixture
+def dict_representation():
+    return {
+        "m_header": {
+            "m_packet_format": 2021,
+            "m_game_major_version": 1,
+            "m_game_minor_version": 23,
+            "m_packet_version": 25,
+            "m_packet_id": 10,
+            "m_session_uid": 2501,
+            "m_session_time": 25.01,
+            "m_frame_identifier": 123,
+            "m_player_car_index": 6,
+            "m_secondary_player_car_index": 255,
+        },
+        "m_car_damage_data": [single__dict_representation() for _ in range(22)],
+    }
+
+
 @pytest.fixture
 def json_representation():
-    entries = ",\n    ".join(single_car_damage__json_representation() for _ in range(22))
+    entries = ",\n    ".join(single__json_representation() for _ in range(22))
 
     return (
         "{\n"
@@ -155,12 +162,9 @@ def json_representation():
 
 @pytest.fixture
 def binary_representation():
-    entry = (
-        b"\x00\x00\x00\x00\x00\x00\x80\x3f\x00\x00\x00\x3f\x00\x00\x00\x00\x0a\x14\x1e\x28\x0a\x14\x1e\x28\x14"
-        b"\x28\x04\x0c\x00\x13\x01\x26\x14\x32\x1e\x0a\x28\x3c\x46"
-    )
     return (
-        b"\xe5\x07\x01\x17\x19\x0a\xc5\x09\x00\x00\x00\x00\x00\x00\x7b\x14\xc8\x41\x7b\x00\x00\x00\x06\xff" + entry * 22
+        b"\xe5\x07\x01\x17\x19\x0a\xc5\x09\x00\x00\x00\x00\x00\x00\x7b\x14\xc8\x41\x7b\x00\x00\x00\x06\xff"
+        + single__binary_representation() * 22
     )
 
 
