@@ -260,12 +260,10 @@ def test_packet_car_lap_data__get_value(packet, dict_representation):
 
 
 def test_packet_car_lap_data__to_json(packet, json_representation):
-    print(packet.to_json())
     assert packet.to_json() == json_representation
 
 
 def test_packet_car_lap_data__to_binary(packet, binary_representation):
-    print("".join(f"\\x{x:02x}" for x in packet.pack()))
     assert packet.pack() == binary_representation
 
 
