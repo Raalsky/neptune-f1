@@ -1,6 +1,8 @@
 import ctypes
 
-from .utils import Packet
+from neptune_f1.packets.codemasters_f12021.utils import Packet
+
+__all__ = ["PacketHeader"]
 
 
 class PacketHeader(Packet):
@@ -23,7 +25,7 @@ class PacketHeader(Packet):
         ("m_frame_identifier", ctypes.c_uint32),
         # Index of player's car in the array
         ("m_player_car_index", ctypes.c_uint8),
-        # Index of secondary player's car in the array (splitscreen)
+        # Index of secondary player's car in the array (split-screen)
         # 255 if no second player
         ("m_secondary_player_car_index", ctypes.c_uint8),
     ]

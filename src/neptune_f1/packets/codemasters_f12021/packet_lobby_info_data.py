@@ -1,7 +1,9 @@
 import ctypes
 
-from .packet_header import PacketHeader
-from .utils import Packet
+from neptune_f1.packets.codemasters_f12021.packet_header import PacketHeader
+from neptune_f1.packets.codemasters_f12021.utils import Packet
+
+__all__ = ["PacketLobbyInfoData"]
 
 
 class LobbyInfoData(Packet):
@@ -12,8 +14,7 @@ class LobbyInfoData(Packet):
         ("m_team_id", ctypes.c_uint8),
         # Nationality of the driver
         ("m_nationality", ctypes.c_uint8),
-        # Name of participant in UTF-8 format – null terminated
-        # Will be truncated with ... (U+2026) if too long
+        # Name of participant in UTF-8 format – null terminated Will be truncated with ... (U+2026) if too long
         ("m_name", ctypes.c_char * 48),
         # Car number of the player
         ("m_car_number", ctypes.c_uint8),
@@ -29,6 +30,5 @@ class PacketLobbyInfoData(Packet):
         ("m_header", PacketHeader),
         # Number of players in the lobby data
         ("m_num_players", ctypes.c_uint8),
-        # Lobby info data array
         ("m_lobby_players", LobbyInfoData * 22),
     ]

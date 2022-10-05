@@ -1,7 +1,9 @@
 import ctypes
 
-from .packet_header import PacketHeader
-from .utils import Packet
+from neptune_f1.packets.codemasters_f12021.packet_header import PacketHeader
+from neptune_f1.packets.codemasters_f12021.utils import Packet
+
+__all__ = ["PacketParticipantsData"]
 
 
 class ParticipantData(Packet):
@@ -20,8 +22,7 @@ class ParticipantData(Packet):
         ("m_race_number", ctypes.c_uint8),
         # Nationality of the driver
         ("m_nationality", ctypes.c_uint8),
-        # Name of participant in UTF-8 format – null terminated
-        # Will be truncated with … (U+2026) if too long
+        # Name of participant in UTF-8 format – null terminated Will be truncated with … (U+2026) if too long
         ("m_name", ctypes.c_char * 48),
         # The player's UDP setting, 0 = restricted, 1 = public
         ("m_your_telemetry", ctypes.c_uint8),
@@ -33,9 +34,7 @@ class PacketParticipantsData(Packet):
     _fields_ = [
         # Header
         ("m_header", PacketHeader),
-        # Number of active cars in the data – should match number of
-        # cars on HUD
+        # Number of active cars in the data – should match number of cars on HUD
         ("m_num_active_cars", ctypes.c_uint8),
-        # Participant data array
         ("m_participants", ParticipantData * 22),
     ]

@@ -1,7 +1,9 @@
 import ctypes
 
-from .packet_header import PacketHeader
-from .utils import Packet
+from neptune_f1.packets.codemasters_f12021.packet_header import PacketHeader
+from neptune_f1.packets.codemasters_f12021.utils import Packet
+
+__all__ = ["PacketSessionData"]
 
 
 class MarshalZone(Packet):

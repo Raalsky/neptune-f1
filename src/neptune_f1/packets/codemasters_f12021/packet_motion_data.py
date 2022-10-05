@@ -1,7 +1,9 @@
 import ctypes
 
-from .packet_header import PacketHeader
-from .utils import Packet
+from neptune_f1.packets.codemasters_f12021.packet_header import PacketHeader
+from neptune_f1.packets.codemasters_f12021.utils import Packet
+
+__all__ = ["PacketMotionData"]
 
 
 class CarMotionData(Packet):
@@ -51,8 +53,8 @@ class PacketMotionData(Packet):
         # Header
         ("m_header", PacketHeader),
         # Data for all cars on track
-        # Extra player car ONLY data
         ("m_car_motion_data", CarMotionData * 22),
+        # Extra player car ONLY data
         # Note: All wheel arrays have the following order:
         ("m_suspension_position", ctypes.c_float * 4),
         # RL, RR, FL, FR

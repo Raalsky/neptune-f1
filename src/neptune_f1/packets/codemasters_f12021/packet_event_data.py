@@ -1,7 +1,9 @@
 import ctypes
 
-from .packet_header import PacketHeader
-from .utils import Packet, PacketMixin
+from neptune_f1.packets.codemasters_f12021.packet_header import PacketHeader
+from neptune_f1.packets.codemasters_f12021.utils import Packet, PacketDataBunch
+
+__all__ = ["PacketEventData"]
 
 
 class FastestLap(Packet):
@@ -31,6 +33,14 @@ class RaceWinner(Packet):
     _fields_ = [
         # Vehicle index of the race winner
         ("vehicle_idx", ctypes.c_uint8),
+    ]
+
+
+class Buttons(Packet):
+    _fields_ = [
+        # Bit flags specifying which buttons are being pressed
+        ("m_button_status", ctypes.c_uint32),
+        # currently - see appendices
     ]
 
 
@@ -96,15 +106,7 @@ class Flashback(Packet):
     ]
 
 
-class Buttons(Packet):
-    _fields_ = [
-        # Bit flags specifying which buttons are being pressed
-        # currently - see appendices
-        ("m_button_status", ctypes.c_uint32),
-    ]
-
-
-class EventDataDetails(ctypes.Union, PacketMixin):
+class EventDataDetails(ctypes.Union, PacketDataBunch):
     _fields_ = [
         ("fastest_lap", FastestLap),
         ("retirement", Retirement),
@@ -127,7 +129,6 @@ class PacketEventData(Packet):
         ("m_header", PacketHeader),
         # Event string code, see below
         ("m_event_string_code", ctypes.c_uint8 * 4),
-        # Event details - should be interpreted differently
-        # for each type
+        # Event details - should be interpreted differently for each type
         ("m_event_details", EventDataDetails),
     ]
