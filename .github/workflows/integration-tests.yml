@@ -21,7 +21,7 @@ jobs:
         uses: ./.github/actions/package
 
       - name: Run integration tests
-        run: poetry run coverage run --source='src/' -m pytest tests/integration
+        run: coverage run --source='src/' -m pytest tests/integration
 
       - name: Coverage report
         uses: ./.github/actions/coverage

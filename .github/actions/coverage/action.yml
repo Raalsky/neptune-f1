@@ -12,7 +12,7 @@ runs:
     using: "composite"
     steps:
       - name: Prepare coverage report
-        run: poetry run coverage xml
+        run: coverage xml
         shell: bash
 
       - name: Upload coverage report do Codecov
