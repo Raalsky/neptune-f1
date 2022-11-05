@@ -1,4 +1,3 @@
-# pragma: no cover
 __all__ = ["drivers"]
 
 drivers = [

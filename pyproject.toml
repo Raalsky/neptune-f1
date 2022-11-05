@@ -56,3 +56,6 @@ exclude = ["old_src/"]
 
 [tool.behave]
 paths = "tests/features"
+
+[tool.coverage.run]
+omit = ["src/neptune_f1/packets/*/mappings"]
