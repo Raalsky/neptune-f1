@@ -9,10 +9,6 @@ runs:
         with:
           python-version: "3.10"
 
-      - name: Install build dependencies
-        run: pip install poetry poetry-dynamic-versioning
-        shell: bash
-
       - name: Install package
-        run: poetry install --with dev
+        run: pip install -e .[dev]
         shell: bash
