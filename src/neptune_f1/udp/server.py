@@ -6,11 +6,14 @@ from dataclasses import dataclass
 
 @dataclass
 class ServerConfig:
-    host: str = "192.168.0.25"
+    host: str = "localhost"
     port: int = 20777
 
 
 class ServerRequestHandler(socketserver.DatagramRequestHandler):
+    def setup(self) -> None:
+        pass
+
     @property
     def _ack_message(self) -> dict:
         return {"type": "connect", "time": time.time(), "connection": True}
@@ -19,14 +22,15 @@ class ServerRequestHandler(socketserver.DatagramRequestHandler):
         self.wfile.write(json.dumps(self._ack_message).encode())
 
     def handle(self) -> None:
-        print(f"Received packet from '{self.client_address[0]}'")
-
         data = self.rfile.readline().strip()
 
-        with open("session_data/packets-{}.bytes".format(str(time.time()).replace(".", "")), "w") as handler:
-            handler.write("".join(f"\\x{x:02x}" for x in data) + "\n")
+        print(f"{self.client_address[0]} wrote:")
+        print(data)
 
         self._send_ack()
+
+    def finish(self) -> None:
+        pass
 
 
 class Server(socketserver.UDPServer):
