@@ -5,6 +5,8 @@ __all__ = ["Packet", "PacketDataBunch"]
 
 
 def to_json(*args, **kwargs):
+    kwargs.setdefault("indent", 2)
+
     kwargs["sort_keys"] = True
     kwargs["ensure_ascii"] = False
     kwargs["separators"] = (",", ": ")
