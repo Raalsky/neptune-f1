@@ -1,3 +1,4 @@
+# pragma: no cover
 __all__ = ["buttons"]
 
 buttons = [
