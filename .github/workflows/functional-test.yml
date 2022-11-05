@@ -21,7 +21,7 @@ jobs:
         uses: ./.github/actions/package
 
       - name: Run functional tests
-        run: poetry run coverage run --source='src/' -m behave
+        run: coverage run --source='src/' -m behave
 
       - name: Coverage report
         uses: ./.github/actions/coverage
