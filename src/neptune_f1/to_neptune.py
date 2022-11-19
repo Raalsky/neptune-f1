@@ -1,5 +1,8 @@
 import json
 
+import neptune.new as neptune
+import numpy as np
+
 from neptune_f1.metric_over_lap_period import MetricOverLapPeriod
 
 # if full? then call observer
@@ -57,60 +60,64 @@ def packet_lap_data():
                     "lap_distance": lap_data.get("m_lap_distance"),
                 }
             )
-            break
 
     return sorted(arr, key=lambda x: x["session_time"])
 
 
-def log_motion_metrics(run, lap_indices):
+def log_motion_metrics(run, lap_indices, lap_distance):
     packets = packet_motion_data()
     metrics = {
         "speed": MetricOverLapPeriod(name="Speed", lap_length=1500, resolution=10),
-        "throttle": MetricOverLapPeriod(name="Throttle", lap_length=1500, resolution=10),
-        "steer": MetricOverLapPeriod(name="Steer", lap_length=1500, resolution=10),
-        "brake": MetricOverLapPeriod(name="Brake", lap_length=1500, resolution=10),
-        "clutch": MetricOverLapPeriod(name="Clutch", lap_length=1500, resolution=10),
-        "gear": MetricOverLapPeriod(name="Gear", lap_length=1500, resolution=10),
-        "engine_temperature": MetricOverLapPeriod(name="Engine Temperature", lap_length=1500, resolution=10),
+        # "throttle": MetricOverLapPeriod(name="Throttle", lap_length=1500, resolution=10),
+        # "steer": MetricOverLapPeriod(name="Steer", lap_length=1500, resolution=10),
+        # "brake": MetricOverLapPeriod(name="Brake", lap_length=1500, resolution=10),
+        # "clutch": MetricOverLapPeriod(name="Clutch", lap_length=1500, resolution=10),
+        # "gear": MetricOverLapPeriod(name="Gear", lap_length=1500, resolution=10),
+        # "engine_temperature": MetricOverLapPeriod(name="Engine Temperature", lap_length=1500, resolution=10),
     }
     for packet in packets:
         for metric_name in metrics:
             metrics[metric_name].log(at_distance=packet["session_time"], value=packet[metric_name])
 
-    for metric_name in metrics:
-        run[metric_name].log(metrics[metric_name].result()[lap_indices].tolist())
+    lap_length = int(np.ceil(np.max(lap_distance[lap_indices])))
+    speed_over_distance = MetricOverLapPeriod(name="Speed over lap distance", lap_length=lap_length, resolution=10)
+
+    print(lap_length)
+
+    for step, value in zip(lap_distance[lap_indices], metrics["speed"].result()[lap_indices].tolist()):
+        speed_over_distance.log(at_distance=step, value=value)
+
+    run["lap_2_distance"].log(speed_over_distance.result().tolist())
 
 
 def log_lap_metrics(run):
     packets = packet_lap_data()
     metrics = {
         "lap": MetricOverLapPeriod(name="Lap", lap_length=5000, resolution=10),
-        # "car_position": MetricOverLapPeriod(name="Car Position", lap_length=5000, resolution=10),
-        # "grid_position": MetricOverLapPeriod(name="Grid Position", lap_length=5000, resolution=10),
-        # "lap_distance": MetricOverLapPeriod(name="Lap Distance", lap_length=5000, resolution=10),
+        "car_position": MetricOverLapPeriod(name="Car Position", lap_length=5000, resolution=10),
+        "grid_position": MetricOverLapPeriod(name="Grid Position", lap_length=5000, resolution=10),
+        "lap_distance": MetricOverLapPeriod(name="Lap Distance", lap_length=5000, resolution=10),
     }
-    for packet in packets:
+
+    for index, packet in enumerate(packets):
         for metric_name in metrics:
             metrics[metric_name].log(at_distance=packet["session_time"], value=packet[metric_name])
 
-    print(metrics["lap"].result()[:2], len(metrics["lap"].result()))
+    lap_indices = np.where(metrics["lap"].result() == 2)
 
-    # lap_indices = np.where(metrics['lap'].result() == 2)
-    #
-    # for metric_name in metrics:
-    #     run[metric_name].log(
-    #         metrics[metric_name].result().tolist()
-    #     )
-    #
-    # return lap_indices
+    for metric_name in metrics:
+        run[metric_name].log(metrics[metric_name].result().tolist())
+
+    return lap_indices, metrics["lap_distance"].result()
+
+
+def main():
+    with neptune.init_run(
+        capture_stdout=False, capture_stderr=False, capture_hardware_metrics=False, capture_traceback=False
+    ) as run:
+        lap_indices, lap_distance = log_lap_metrics(run)
+        log_motion_metrics(run, lap_indices, lap_distance)
 
 
 if __name__ == "__main__":
-    # with neptune.init_run(
-    #     capture_stdout=False,
-    #     capture_stderr=False,
-    #     capture_hardware_metrics=False,
-    #     capture_traceback=False
-    # ) as run:
-    lap_indices = log_lap_metrics(None)
-    # log_motion_metrics(run, lap_indices)
+    main()
