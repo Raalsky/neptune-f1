@@ -25,7 +25,7 @@ jobs:
       run: pip install pre-commit
 
     - name: Pre-commit
-      uses: |
+      run: |
         should_run=$(pre-commit run --all-files || echo "true")
         echo "should_run=$should_run" >> $GITHUB_OUTPUT
 
