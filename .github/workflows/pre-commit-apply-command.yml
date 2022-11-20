@@ -25,12 +25,11 @@ jobs:
       run: pip install pre-commit
 
     - name: Pre-commit
-      run: |
-        pre-commit run --all-files
-        echo "changed=$?" >> $GITHUB_OUTPUT
+      continue-on-error: true
+      run: pre-commit run --all-files
 
     - name: Commit to the PR branch
-      if: steps.pre-commit.outputs.changed != '0'
+      if: steps.pre-commit.outcome == 'success' && steps.pre-commit.conclusion == 'success'
       run: |
         git config --global user.name 'neptune-bot'
         git config --global user.email 'rafal.jankowski+neptunebot@neptune.ai'
