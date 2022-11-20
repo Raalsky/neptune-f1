@@ -24,6 +24,6 @@ runs:
 #          key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('pyproject.toml') }}-${{ steps.date.outputs.date }}
 
       - name: Install package
-#        if: steps.cache.outputs.cache-hit != 'true'
-        run: pip install --upgrade -e .[dev] -v
+        if: steps.setup-python.outputs.cache-hit != 'true'
+        run: pip install --upgrade -e .[dev]
         shell: bash
