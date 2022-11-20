@@ -12,7 +12,7 @@ jobs:
         uses: peter-evans/slash-command-dispatch@v3
         with:
           commands: |
-            apply-pre-commit
+            pre-commit-apply
           reaction-token: ${{ secrets.NEPTUNE_BOT_ACCESS_TOKEN }}
           token: ${{ secrets.NEPTUNE_BOT_ACCESS_TOKEN }}
           permission: write
