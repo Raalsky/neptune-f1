@@ -1,0 +1,58 @@
+name: functional
+
+on:
+  repository_dispatch:
+    types: [ full-tests-command ]
+
+jobs:
+  post-comment:
+    runs-on: ubuntu-latest
+#    if: ${{ github.event.action == 'full-tests-command' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Add reaction
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
+          reaction-type: hooray
+
+      - name: Create URL to the run output
+        id: vars
+        run: echo "run-url=https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_OUTPUT
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
+          body: |
+            Hey @${{ github.event.client_payload.github.actor }}!
+            [Click here to workflow details][1]
+            [1]: ${{ steps.vars.outputs.run-url }}
+
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        python-version: [ "3.9" ]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Prepare package
+        uses: ./.github/actions/package
+
+      - name: Run functional tests
+        run: coverage run --source='src/' -m behave
+
+      - name: Coverage report
+        uses: ./.github/actions/coverage
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: functional
