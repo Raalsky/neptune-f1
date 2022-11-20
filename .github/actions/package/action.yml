@@ -10,6 +10,7 @@ runs:
         with:
           python-version: "3.10"
           cache: 'poetry'
+          cache-dependency-path: pyproject.toml
 
 #      - name: Get current date
 #        id: date
