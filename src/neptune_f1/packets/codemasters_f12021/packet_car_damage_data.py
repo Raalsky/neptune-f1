@@ -47,8 +47,6 @@ class CarDamageData(Packet):
     ]
 
 
-
-
 class PacketCarDamageData(Packet):
     _id_ = 10
     _fields_ = [
