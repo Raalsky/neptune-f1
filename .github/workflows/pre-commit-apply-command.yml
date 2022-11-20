@@ -1,0 +1,37 @@
+name: pre-commit-apply
+
+on:
+  pull_request:
+  repository_dispatch:
+    types: [pre-commit-apply-command]
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.NEPTUNE_BOT_ACCESS_TOKEN }}
+        repository: ${{ github.event.client_payload.pull_request.head.repo.full_name }}
+        ref: ${{ github.event.client_payload.pull_request.head.ref }}
+
+    - name: Install Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+
+    - name: Install pre-commit
+      run: pip install pre-commit
+
+#    - name: Run pre-commit
+#      uses: |
+#        pre-commit run --all-files || echo "true"
+
+    - name: Commit to the PR branch
+      run: |
+        pre-commit run --all-files
+        git config --global user.name 'neptune-bot'
+        git config --global user.email 'rafal.jankowski+neptunebot@neptune.ai'
+        git commit -am "pre-commit applied"
+        git push
