@@ -29,7 +29,7 @@ jobs:
       run: pre-commit run --all-files
 
     - name: Commit to the PR branch
-      if: steps.pre-commit.outcome == 'failure'
+#      if: steps.pre-commit.outcome == 'failure'
       run: |
         git config --global user.name 'neptune-bot'
         git config --global user.email 'rafal.jankowski+neptunebot@neptune.ai'
