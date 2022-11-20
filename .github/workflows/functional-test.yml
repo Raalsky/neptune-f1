@@ -9,6 +9,8 @@ on:
       - "*"
 
 jobs:
+  call-another:
+    uses: ./.github/workflows/integration-tests.yml
   test:
     runs-on: ${{ matrix.os }}
     strategy:
