@@ -1,9 +1,8 @@
 name: pre-commit-apply
 
 on:
-  pull_request:
-#  repository_dispatch:
-#    types: [pre-commit-apply-command]
+  repository_dispatch:
+    types: [pre-commit-apply-command]
 
 jobs:
   pre-commit:
