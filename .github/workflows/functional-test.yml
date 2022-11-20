@@ -13,7 +13,7 @@ on:
 jobs:
   post-comment:
     runs-on: ubuntu-latest
-    if: ${{ github.event.repository_dispatch.event_type == 'full-tests-command' }}
+    if: ${{ github.event.event_type == 'full-tests-command' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
