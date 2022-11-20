@@ -13,7 +13,7 @@ on:
 jobs:
   post-comment:
     runs-on: ubuntu-latest
-    if: ${{ github.event.event_type == 'full-tests-command' }}
+    if: ${{ github.event.action == 'full-tests-command' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -55,7 +55,7 @@ jobs:
         uses: ./.github/actions/package
 
       - name: Run functional tests
-        run: coverage run --source='src/' -m behave
+        run: coverage run --source='src/' -m behave 
 
       - name: Coverage report
         uses: ./.github/actions/coverage
