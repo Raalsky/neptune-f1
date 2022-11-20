@@ -46,7 +46,6 @@ class CarDamageData(Packet):
         ("m_engine_tcwear", ctypes.c_uint8),
     ]
 
-
 class PacketCarDamageData(Packet):
     _id_ = 10
     _fields_ = [
