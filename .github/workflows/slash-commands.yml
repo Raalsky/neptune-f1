@@ -11,6 +11,7 @@ jobs:
       - name: Slash Command Dispatch
         uses: peter-evans/slash-command-dispatch@v3
         with:
+          reaction-token: ${{ secrets.NEPTUNE_BOT_ACCESS_TOKEN }}
           token: ${{ secrets.NEPTUNE_BOT_ACCESS_TOKEN }}
           commands: |
             hello
