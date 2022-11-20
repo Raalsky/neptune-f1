@@ -1,7 +1,6 @@
 name: pre-commit-apply
 
 on:
-  pull_request:
   repository_dispatch:
     types: [pre-commit-apply-command]
 
