@@ -34,7 +34,7 @@ jobs:
             [1]: ${{ steps.vars.outputs.run-url }}
 
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         os: [ ubuntu-latest ]

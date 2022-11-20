@@ -10,7 +10,15 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        - os: ubuntu-latest
+          python-version: 3.7
+          if: ${{ true }}
+        - os: ubuntu-latest
+          python-version: 3.8
+          if: ${{ false }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
