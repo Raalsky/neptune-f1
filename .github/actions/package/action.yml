@@ -9,12 +9,10 @@ runs:
         uses: actions/setup-python@v3
         with:
           python-version: "3.10"
-          cache: 'pip'
-          cache-dependency-path: pyproject.toml
 
 #      - name: Get current date
 #        id: date
-#        run: echo "name=date::$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+#        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 #        shell: bash
 #
 #      - uses: actions/cache@v3
@@ -24,6 +22,10 @@ runs:
 #          key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('pyproject.toml') }}-${{ steps.date.outputs.date }}
 
       - name: Install package
-        if: steps.setup-python.outputs.cache-hit != 'true'
-        run: pip install --upgrade -e .[dev]
+#        if: steps.cache.outputs.cache-hit != 'true'
+        run: pip install --upgrade -e .[dev] -v
+        shell: bash
+
+      - name: Show structure
+        run: find ~/
         shell: bash
