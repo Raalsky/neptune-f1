@@ -9,17 +9,18 @@ runs:
         uses: actions/setup-python@v3
         with:
           python-version: "3.10"
+          cache: 'poetry'
 
-      - name: Get current date
-        id: date
-        run: echo "name=date::$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-        shell: bash
-
-      - uses: actions/cache@v3
-        id: cache
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('pyproject.toml') }}-${{ steps.date.outputs.date }}
+#      - name: Get current date
+#        id: date
+#        run: echo "name=date::$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+#        shell: bash
+#
+#      - uses: actions/cache@v3
+#        id: cache
+#        with:
+#          path: ~/.cache/pip
+#          key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('pyproject.toml') }}-${{ steps.date.outputs.date }}
 
       - name: Install package
 #        if: steps.cache.outputs.cache-hit != 'true'
