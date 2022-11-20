@@ -13,6 +13,7 @@ on:
 jobs:
   post-comment:
     runs-on: ubuntu-latest
+    if: ${{ github.event.repository_dispatch.type == 'full-tests-command' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -20,25 +21,22 @@ jobs:
           fetch-depth: 0
 
       - name: Add reaction
-        if: ${{ github.event.repository_dispatch.type == 'full-tests-command' }}
         uses: peter-evans/create-or-update-comment@v2
         with:
           comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
           reaction-type: hooray
 
       - name: Create URL to the run output
-        if: ${{ github.event.repository_dispatch.type == 'full-tests-command' }}
         id: vars
         run: echo "run-url=https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_OUTPUT
 
       - name: Create comment
-        if: ${{ github.event.repository_dispatch.type == 'full-tests-command' }}
         uses: peter-evans/create-or-update-comment@v2
         with:
           issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
           body: |
-            Hello @${{ github.event.client_payload.github.actor }}!
-            [Click here to see the command run output][1]
+            Hey @${{ github.event.client_payload.github.actor }}!
+            [Click here to workflow details][1]
             [1]: ${{ steps.vars.outputs.run-url }}
 
   test:
