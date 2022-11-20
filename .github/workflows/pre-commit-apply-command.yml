@@ -24,11 +24,13 @@ jobs:
     - name: Install pre-commit
       run: pip install pre-commit
 
-#    - name: Run pre-commit
-#      uses: |
-#        pre-commit run --all-files || echo "true"
+    - name: Pre-commit
+      uses: |
+        should_run=$(pre-commit run --all-files || echo "true")
+        echo "should_run=$should_run" >> $GITHUB_OUTPUT
 
     - name: Commit to the PR branch
+      if: steps.pre-commit.outputs.should_run == 'true'
       run: |
         pre-commit run --all-files
         git config --global user.name 'neptune-bot'
