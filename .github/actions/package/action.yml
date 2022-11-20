@@ -5,10 +5,22 @@ runs:
     using: "composite"
     steps:
       - name: Install Python 3.10
+        id: setup-python
         uses: actions/setup-python@v3
         with:
           python-version: "3.10"
 
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        shell: bash
+
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('pyproject.toml') }}-${{ steps.date.outputs.date }}
+
       - name: Install package
-        run: pip install -e .[dev]
+        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+        run: pip install --upgrade -e .[dev]
         shell: bash
