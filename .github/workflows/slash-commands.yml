@@ -13,6 +13,8 @@ jobs:
         with:
           commands: |
             pre-commit-apply
+            help
+            full-tests
           reaction-token: ${{ secrets.NEPTUNE_BOT_ACCESS_TOKEN }}
           token: ${{ secrets.NEPTUNE_BOT_ACCESS_TOKEN }}
           permission: write
