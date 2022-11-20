@@ -23,9 +23,5 @@ runs:
 
       - name: Install package
 #        if: steps.cache.outputs.cache-hit != 'true'
-        run: pip install --upgrade -e .[dev]
-        shell: bash
-
-      - name: Test
-        run: which coverage
+        run: pip install --upgrade -e .[dev] -v
         shell: bash
