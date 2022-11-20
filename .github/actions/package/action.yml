@@ -16,11 +16,12 @@ runs:
         shell: bash
 
       - uses: actions/cache@v3
+        id: cache
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('pyproject.toml') }}-${{ steps.date.outputs.date }}
 
       - name: Install package
-        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
         run: pip install --upgrade -e .[dev]
         shell: bash
