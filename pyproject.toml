@@ -20,12 +20,7 @@ mypy = { version = "^0.971", optional = true }
 coverage = { version = "^6.4.4", optional = true }
 
 [tool.poetry.extras]
-dev = [
-    "pre-commit",
-    "pytest",
-    "mypy",
-    "coverage"
-]
+dev = ["pre-commit", "pytest", "mypy", "coverage"]
 
 [tool.poetry-dynamic-versioning]
 enable = true
