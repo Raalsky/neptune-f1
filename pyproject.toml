@@ -24,7 +24,7 @@ dev = [
     "pre-commit",
     "pytest",
     "mypy",
-    "coverage",
+    "coverage"
 ]
 
 [tool.poetry-dynamic-versioning]
