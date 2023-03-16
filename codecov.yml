@@ -5,12 +5,21 @@ coverage:
 
 flags:
   unit:
-    carryforward: false
+    paths:
+      - src/neptune_f1
+    carryforward: true
+
   functional:
-    carryforward: false
-  integration:
-    carryforward: false
+    paths:
+      - src/neptune_f1
+    carryforward: true
+
   ubuntu:
-    carryforward: true
+    paths:
+      - src/neptune_f1
+    carryforward: false
+
   macos:
-    carryforward: true
+    paths:
+      - src/neptune_f1
+    carryforward: false
