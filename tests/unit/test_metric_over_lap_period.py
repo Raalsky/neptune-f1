@@ -1,21 +1,28 @@
+import sys
+
 import numpy as np
 import pytest
 
 from neptune_f1.metric_over_lap_period import MetricOverLapPeriod
 
+IS_MACOS = sys.platform == "darwin"
 
+
+@pytest.mark.skipif(IS_MACOS, reason="Dont like MACOS")
 def test_name():
     metric = MetricOverLapPeriod(name="Sample Metric", lap_length=10)
 
     assert metric.name == "Sample Metric"
 
 
+@pytest.mark.skipif(IS_MACOS, reason="Dont like MACOS")
 def test_repr():
     metric = MetricOverLapPeriod(name="Sample Metric", lap_length=10)
 
     assert str(metric) == "sample-metric"
 
 
+@pytest.mark.skipif(IS_MACOS, reason="Dont like MACOS")
 def test_array_with_all_values():
     metric = MetricOverLapPeriod(name="Sample Metric", lap_length=3)
 

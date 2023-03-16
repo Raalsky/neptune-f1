@@ -2,3 +2,24 @@ coverage:
   status:
     project: off
     patch: off
+
+flags:
+  unit:
+    paths:
+      - src/neptune_f1
+    carryforward: true
+
+  functional:
+    paths:
+      - src/neptune_f1
+    carryforward: true
+
+  ubuntu:
+    paths:
+      - src/neptune_f1
+    carryforward: false
+
+  macos:
+    paths:
+      - src/neptune_f1
+    carryforward: false

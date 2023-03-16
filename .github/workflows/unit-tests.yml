@@ -12,7 +12,11 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    strategy:
+        fail-fast: false
+        matrix:
+          os: [ubuntu, macos]
+    runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -30,4 +34,4 @@ jobs:
         uses: ./.github/actions/coverage
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          flags: unit
+          flags: unit,${{ matrix.os }}

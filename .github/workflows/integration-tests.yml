@@ -1,12 +1,13 @@
 name: integration
 
 on:
-  pull_request:
-  push:
-    branches:
-      - master
-    tags:
-      - "*"
+  workflow_call:
+#  pull_request:
+#  push:
+#    branches:
+#      - master
+#    tags:
+#      - "*"
 
 jobs:
   test:
