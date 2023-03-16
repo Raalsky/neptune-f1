@@ -2,3 +2,15 @@ coverage:
   status:
     project: off
     patch: off
+
+flags:
+  unit:
+    carryforward: false
+  functional:
+    carryforward: false
+  integration:
+    carryforward: false
+  ubuntu:
+    carryforward: true
+  macos:
+    carryforward: true
