@@ -7,19 +7,19 @@ flags:
   unit:
     paths:
       - src/neptune_f1
-    carryforward: false
+    carryforward: true
 
   functional:
     paths:
       - src/neptune_f1
-    carryforward: false
+    carryforward: true
 
   ubuntu:
     paths:
       - src/neptune_f1
-    carryforward: false
+    carryforward: true
 
   macos:
     paths:
       - src/neptune_f1
-    carryforward: false
+    carryforward: true
