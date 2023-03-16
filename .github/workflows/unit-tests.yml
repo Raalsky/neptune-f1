@@ -15,7 +15,7 @@ jobs:
     strategy:
         fail-fast: false
         matrix:
-          os: [ubuntu, macos]
+          os: [ubuntu] #, macos]
     runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Checkout repository

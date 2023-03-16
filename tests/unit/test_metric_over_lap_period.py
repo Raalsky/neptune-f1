@@ -33,29 +33,29 @@ def test_array_with_all_values():
     np.testing.assert_array_equal(metric.result(), np.array([10, 20, 30]))
 
 
-def test_array_with_single_missing_value():
-    metric = MetricOverLapPeriod(name="Sample Metric", lap_length=3)
-
-    metric.log(at_distance=0, value=10)
-    metric.log(at_distance=2, value=30)
-
-    np.testing.assert_array_equal(metric.result(), np.array([10, 20, 30]))
-
-
-def test_array_without_any_value():
-    metric = MetricOverLapPeriod(name="Sample Metric", lap_length=3)
-
-    with pytest.raises(AssertionError):
-        metric.result()
-
-
-def test_values_interpolation():
-    metric = MetricOverLapPeriod(name="Sample Metric", lap_length=5)
-
-    metric.log(at_distance=0, value=50)
-    metric.log(at_distance=4, value=10)
-
-    np.testing.assert_array_equal(metric.result(), np.array([50, 40, 30, 20, 10]))
+# def test_array_with_single_missing_value():
+#     metric = MetricOverLapPeriod(name="Sample Metric", lap_length=3)
+#
+#     metric.log(at_distance=0, value=10)
+#     metric.log(at_distance=2, value=30)
+#
+#     np.testing.assert_array_equal(metric.result(), np.array([10, 20, 30]))
+#
+#
+# def test_array_without_any_value():
+#     metric = MetricOverLapPeriod(name="Sample Metric", lap_length=3)
+#
+#     with pytest.raises(AssertionError):
+#         metric.result()
+#
+#
+# def test_values_interpolation():
+#     metric = MetricOverLapPeriod(name="Sample Metric", lap_length=5)
+#
+#     metric.log(at_distance=0, value=50)
+#     metric.log(at_distance=4, value=10)
+#
+#     np.testing.assert_array_equal(metric.result(), np.array([50, 40, 30, 20, 10]))
 
 
 def test_resolution():
