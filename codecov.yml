@@ -7,12 +7,12 @@ flags:
   unit:
     paths:
       - src/neptune_f1
-    carryforward: true
+    carryforward: false
 
   functional:
     paths:
       - src/neptune_f1
-    carryforward: true
+    carryforward: false
 
   ubuntu:
     paths:
