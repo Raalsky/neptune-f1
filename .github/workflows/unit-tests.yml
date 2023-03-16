@@ -11,9 +11,10 @@ on:
       - "*"
 
 jobs:
-  test:
-    matrix:
-      os: [ubuntu-latest, macos-latest]
+  test:strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
