@@ -1,9 +1,9 @@
-import numpy as np
-import pytest
 import sys
 
-from neptune_f1.metric_over_lap_period import MetricOverLapPeriod
+import numpy as np
+import pytest
 
+from neptune_f1.metric_over_lap_period import MetricOverLapPeriod
 
 IS_MACOS = sys.platform == "darwin"
 
