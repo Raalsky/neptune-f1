@@ -47,3 +47,6 @@ exclude = ["old_src/"]
 
 [tool.coverage.run]
 omit = ["src/neptune_f1/packets/*/mappings"]
+
+[tool.ruff]
+line-length = 120
