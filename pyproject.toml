@@ -26,7 +26,6 @@ build-backend = "poetry_dynamic_versioning.backend"
 [tool.isort]
 profile = "black"
 line_length = 120
-skip_glob = "^(old_src)"
 
 [tool.black]
 language-version = "python3"
@@ -43,7 +42,6 @@ python_version = "3.10"
 ignore_missing_imports = true
 strict_optional = false
 files = ["src/neptune_f1"]
-exclude = ["old_src/"]
 
 [tool.coverage.run]
 omit = ["src/neptune_f1/packets/*/mappings"]
