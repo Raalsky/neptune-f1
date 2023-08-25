@@ -44,6 +44,13 @@ repos:
     hooks:
     -   id: mypy
         args: [ --config, pyproject.toml ]
-exclude: old_src/
+
+  - repo: https://github.com/trufflesecurity/trufflehog.git
+    rev: v3.53.0
+    hooks:
+      - id: trufflehog
+        name: secret scan
+        entry: bash -c 'trufflehog git file://. --since-commit HEAD --only-verified --fail'
+
 default_language_version:
     python: python3
