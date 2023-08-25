@@ -22,5 +22,5 @@ runs:
           key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('pyproject.toml') }}-${{ steps.date.outputs.date }}
 
       - name: Install package
-        run: pip install -e .[dev]
+        run: pip install -r requirements_dev.txt
         shell: bash

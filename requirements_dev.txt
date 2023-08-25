@@ -1,0 +1,6 @@
+coverage
+mypy
+poetry
+poetry-dynamic-versioning
+pre-commit
+pytest
