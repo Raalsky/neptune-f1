@@ -21,6 +21,10 @@ runs:
           path: ~/.cache/pip
           key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('pyproject.toml') }}-${{ steps.date.outputs.date }}
 
-      - name: Install package
+      - name: Install dev requirements
         run: pip install -r requirements_dev.txt
+        shell: bash
+
+      - name: Install package
+        run: pip install -e .
         shell: bash
